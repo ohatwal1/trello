@@ -4,7 +4,7 @@ import json
 
 class Labels(object):
 
-    def __init__(self, key, token, boardId):
+    def __init__(self, key, token):
         self.key = key
         self.token = token
 

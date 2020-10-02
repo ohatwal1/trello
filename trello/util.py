@@ -8,6 +8,8 @@ class Util(object):
 
         labels_dict = {}
         for data in get_labels:
+            if data.get('name') is not None and data.get('name') != '':
+                labels_dict[data["name"]] = data['id']
             labels_dict[data["color"]] = data["id"]
 
         labels_ = list(labels_dict.keys())
@@ -27,8 +29,10 @@ class Util(object):
             lists_dict[data["name"]] = data["id"]
 
         lists_ = list(lists_dict.keys())
-
-        print("|    Available Lists    |")
+        print("")
+        a = '|    Available Lists    |'
+        print("-" * len(a))
+        print(a)
         s = '    |    '.join(lists_)
         print("-" * (len(s) + 10))
         print("|    " + s + "    |")
