@@ -19,6 +19,7 @@ def get_available_lists_and_labels():
 def get_inputs():
     name_for_card = input("Enter card name: ")
     label = input("Enter label for new card: ")
+    label = "".join(label.split())
     label_data = set(label.split(","))
 
     column = input("Enter list for new card: ")
@@ -59,6 +60,17 @@ def validate_inputs(available_columns, available_labels, input_column, input_lab
         column_id = create_column(input_column)
     else:
         column_id = available_columns[input_column]
+
+    if len(input_labels) == 1:
+        temp = list(input_labels)
+        check = temp[0].split(":")
+        if len(check) == 1:
+            if check[0] in available_labels:
+                label_ids.append(available_labels.get(check[0]))
+                return column_id, label_ids
+            else:
+                label_ids.append(0)
+                return column_id, label_ids
 
     input_not_available_labels = set(filter(lambda x: ':' in x, input_labels))
     input_available_labels = input_labels - input_not_available_labels
