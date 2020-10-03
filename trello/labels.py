@@ -1,6 +1,5 @@
 import requests
-import json
-import trello
+import trello as t
 
 
 class Labels(object):
@@ -13,11 +12,8 @@ class Labels(object):
         resp = requests.post("https://trello.com/1/labels".format(), params={"key": self.key, "token": self.token},
                              data={"name": name, "color": color, "idBoard": idBoard})
 
-        result = trello.Result()
-        result_code = resp.status_code
-        result_data = resp.text
-
-        display_result = result.result_data(result_code, json.loads(result_data))
-        return display_result
+        response = t.Response()
+        response.handle_response(resp, name, color)
+        return response
 
     # Valid values: yellow, purple, blue, red, green, orange, black, sky, pink, lime

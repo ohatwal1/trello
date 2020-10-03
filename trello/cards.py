@@ -1,6 +1,5 @@
 import requests
-import json
-import trello
+import trello as t
 
 
 class Cards(object):
@@ -19,10 +18,6 @@ class Cards(object):
                                    "urlSource": urlSource, "fileSource": fileSource, "idCardSource": idCardSource,
                                    "keepFromSource": keepFromSource})
 
-        result_code = resp.status_code
-        # result_data = resp.text
+        response_ = t.Response().set_response(resp)
+        return response_
 
-        display_result = trello.Result().result_data(result_code, json.loads(resp.text))
-        return display_result
-
-        # return json.loads(resp.text)

@@ -38,46 +38,41 @@ def create_column(column):
     return new_list.get(COLUMN_ID)
 
 
-def create_label(label_name, label_color):
-    label = Labels(key, token)
-    response = label.new_label(label_name, label_color, boardId)
-    return response.get(LABEL_ID)
-
-
 def create_label(labels_to_create):
-    created_labels = []
+    process_result = []
     labels_ = Labels(key, token)
     for l in labels_to_create:
         label_name, label_color = l.split(':')
-        response = labels_.new_label(label_name, label_color, boardId)
-        created_labels += [response.get(LABEL_ID)]
-    return created_labels
+        response_ = labels_.new_label(label_name, label_color, boardId)
+        process_result += [response_]
+    return process_result
 
 
 def validate_inputs(available_columns, available_labels, input_column, input_labels):
     label_ids = []
+    failed_labels = []
     if input_column not in available_columns:
         column_id = create_column(input_column)
     else:
         column_id = available_columns[input_column]
 
-    if len(input_labels) == 1:
-        temp = list(input_labels)
-        check = temp[0].split(":")
-        if len(check) == 1:
-            if check[0] in available_labels:
-                label_ids.append(available_labels.get(check[0]))
-                return column_id, label_ids
-            else:
-                label_ids.append(0)
-                return column_id, label_ids
-
     input_not_available_labels = set(filter(lambda x: ':' in x, input_labels))
-    input_available_labels = input_labels - input_not_available_labels
-    label_ids += create_label(input_not_available_labels)
-    label_ids += list(map(lambda x: available_labels[x], input_available_labels))
+    process_result = create_label(input_not_available_labels)
+    for r in process_result:
+        if r.created:
+            label_ids += [r.id]
+        else:
+            failed_labels += [r.error_messages]
 
-    return column_id, label_ids
+    input_available_labels = input_labels - input_not_available_labels
+    for input_available_label in input_available_labels:
+        if available_labels.get(input_available_label) is not None:
+            label_ids += [available_labels[input_available_label]]
+        else:
+            failed_labels += ['Invalid label name: ' + input_available_label]
+
+    label_validation_result = {True: label_ids, False: failed_labels}
+    return column_id, label_validation_result
 
 
 def main():
@@ -85,9 +80,13 @@ def main():
 
     name_for_card, input_labels, input_column = get_inputs()
 
-    column_id, label_ids = validate_inputs(available_columns, available_labels, input_column, input_labels)
-
-    new_card = process_input(name_for_card, label_ids, column_id)
+    column_id, label_validation_result = validate_inputs(available_columns, available_labels, input_column,
+                                                         input_labels)
+    if label_validation_result[False] is None or len(label_validation_result[False]) == 0:
+        new_card = process_input(name_for_card, label_validation_result[True], column_id)
+    else:
+        new_card = "Card not created"
+        print(label_validation_result[False])
 
     print(new_card)
 
