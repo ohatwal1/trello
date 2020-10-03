@@ -16,14 +16,15 @@ class Response:
     def set_error_messages(self, error_messages):
         self.error_messages = error_messages
 
-    def handle_response(self, response, name, color):
+    def handle_response(self, response, input_):
         self.response_status_code = str(response.status_code)
         self.response_body = json.loads(response.text)
         if self.response_status_code == '200':
             self.id = self.response_body.get('id')
             self.created = True
         else:
-            self.error_messages = self.response_body.get('message') + "for name:" + name + "color: " + color
+            self.error_messages = "Status: " + self.response_status_code + " " + self.response_body.get('message') + \
+                                  " with input: " + input_
             self.created = False
 
     def set_response(self, response):
@@ -31,4 +32,4 @@ class Response:
         self.response_body = json.loads(response.text)
 
     def get_response(self):
-        return "Status: " + str(self.response_status_code) + ", Body: " + str(self.response_body)
+        return "Status: " + self.response_status_code + ", Body: " + str(self.response_body)

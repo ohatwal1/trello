@@ -13,7 +13,7 @@ class Labels(object):
                              data={"name": name, "color": color, "idBoard": idBoard})
 
         response = t.Response()
-        response.handle_response(resp, name, color)
+        response.handle_response(resp, "name: " + name + " color: " + color)
         return response
 
     # Valid values: yellow, purple, blue, red, green, orange, black, sky, pink, lime

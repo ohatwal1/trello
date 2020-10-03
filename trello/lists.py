@@ -1,6 +1,6 @@
 import requests
 import json
-import trello
+import trello as t
 
 
 class Lists(object):
@@ -13,11 +13,8 @@ class Lists(object):
         resp = requests.post("https://trello.com/1/lists".format(), params={"key": self.key, "token": self.token},
                              data={"name": name, "idBoard": idBoard, "idListSource": idListSource, "pos": pos})
 
-        result = trello.Result()
-        result_code = resp.status_code
-        result_data = resp.text
-
-        display_result = result.result_data(result_code, json.loads(result_data))
-        return display_result
+        response = t.Response()
+        response.handle_response(resp, "list name: " + name)
+        return response
 
         # return json.loads(resp.text)
