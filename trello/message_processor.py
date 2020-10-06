@@ -11,7 +11,7 @@ class MessageProcessor:
     def process(self, input_message):
         validator = validation.Validation()
         validation_result = validator.validate(self.available_columns, self.available_labels, input_message)
-        if validation_result.valid:
+        if validation_result.is_valid():
             response = self.process_input(input_message, validation_result.get_validated_list()).get_response()
         else:
             response = "Card not created"
