@@ -6,3 +6,4 @@ from .util import Util
 from .response import Response
 from .message import Message
 from .validation import Validation
+from .message_processor import MessageProcessor

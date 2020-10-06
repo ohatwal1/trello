@@ -4,6 +4,8 @@ class Message:
         self.__columns = ''
         self.__card_name = ''
         self.__board_id = ''
+        self.__key = ''
+        self.__token = ''
 
     def get_labels(self):
         return self.__labels
@@ -16,6 +18,12 @@ class Message:
 
     def get_board_id(self):
         return self.__board_id
+
+    def get_key(self):
+        return self.__key
+
+    def get_token(self):
+        return self.__token
 
     def set_labels(self, labels):
         self.__labels = labels
@@ -31,4 +39,12 @@ class Message:
 
     def set_board_id(self, board_id):
         self.__board_id = board_id
+        return self
+
+    def set_key(self, key):
+        self.__key = key
+        return self
+
+    def set_token(self, token):
+        self.__token = token
         return self
