@@ -22,7 +22,7 @@ def get_inputs(board_id):
     # label = "".join(label.split())
     label_data = set(map(lambda s:s.strip(), label.split(",")))
 
-    column = input("Enter list for new card: ")
+    column = input("Enter column for new card: ")
 
     message_ = message.Message().set_card_name(name_for_card).set_labels(label_data)\
         .set_columns(column)\

@@ -13,7 +13,7 @@ This Python CLI code which will add the card to trello.com. This program take us
   - requests (v 2.22.0)
   - json
 
-## How to run
+ ## How to run
 
 To run the code go to trello/main.py:
   python -m trello.main
@@ -33,5 +33,16 @@ To run the code go to trello/main.py:
    
  - Create card with custom label and list
    - Enter the card name: task_two
-   - Enter the label: blue,custom_lb1:red
+   - Enter the label: blue,custom_lb1:red,sky
    - Enter list name: custom_list1
+   
+ ## Details
+ 
+ - To add card you required Key, Token and Board id which is at moment incorporated in code.
+ - User will provide input to create card with card name, label, and column
+	- Card Name:(data type)string
+	- Label:(data type)string
+	  - Multilple labels can be passed. If its not present with specific format you can create new label and attach it to card
+	  - custom label format : name of label:color(color can be selected from valid color values)
+	- Column: (data type)string
+		- If column in not available on board then it will create new column with specified column name and then card to it.
