@@ -17,6 +17,12 @@ class Response:
         self.error_messages = error_messages
 
     def handle_response(self, response, input_):
+        """
+
+        :param response: json payload
+        :param string input_: card name
+        :return: response
+        """
         self.response_status_code = str(response.status_code)
         self.response_body = json.loads(response.text)
         if self.response_status_code == '200':

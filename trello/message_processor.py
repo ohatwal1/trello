@@ -9,6 +9,11 @@ class MessageProcessor:
         self.available_columns = available_columns
 
     def process(self, input_message):
+        """
+
+        :param message input_message: object
+        :return: string response
+        """
         validator = validation.Validation()
         validation_result = validator.validate(self.available_columns, self.available_labels, input_message)
         if validation_result.is_valid():
@@ -20,6 +25,12 @@ class MessageProcessor:
         return response
 
     def process_input(self, input_message, validated_data):
+        """
+
+        :param input_message: object
+        :param dict validated_data: validated columns
+        :return: response payload in json
+        """
         card = cards.Cards(input_message.get_key(), input_message.get_token())
         label_ids, column_id = validated_data.get('label_ids'), validated_data.get('column_id')
         response = card.new_card(input_message, column_id, label_ids)

@@ -5,6 +5,13 @@ from trello import lists, labels
 class Validation():
 
     def validate(self, available_columns, available_labels, input_message):
+        """
+
+        :param dict available_columns: key:column name, value:id
+        :param dict available_labels: key:column name, value:id
+        :param input_message: object
+        :return:
+        """
         result = validation_result.ValidateResult()
 
         result = self.__validate_column(input_message, available_columns, result)
@@ -12,6 +19,13 @@ class Validation():
         return result
 
     def __validate_column(self, input_message, available_columns, result):
+        """
+
+        :param input_message: object
+        :param available_columns: dict
+        :param result: object
+        :return: object
+        """
         input_column = input_message.get_columns()
         if input_column not in available_columns:
             list_ = lists.Lists(input_message.get_key(), input_message.get_token(), input_message.get_board_id())
@@ -29,6 +43,13 @@ class Validation():
         return result
 
     def __validate_label(self, input_message, available_labels, result):
+        """
+
+        :param input_message: object
+        :param  available_labels: dict
+        :param result: object
+        :return: object
+        """
         input_labels = input_message.get_labels()
         board_id = input_message.get_board_id()
 

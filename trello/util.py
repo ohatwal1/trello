@@ -2,6 +2,11 @@ class Util(object):
 
     @staticmethod
     def available_labels(get_labels):
+        """
+
+        :param list get_labels: available labels
+        :return: dict with mapping of key:name of label and value:id of label
+        """
 
         labels_dict = {}
         for data in get_labels:
@@ -20,7 +25,11 @@ class Util(object):
 
     @staticmethod
     def available_lists(get_lists):
+        """
 
+        :param list get_lists:available lists
+        :return: dict with mapping of key:name of list and value:id of list
+        """
         lists_dict = {}
         for data in get_lists:
             lists_dict[data["name"]] = data["id"]
