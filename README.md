@@ -46,18 +46,4 @@ To run the code go to trello/main.py:
 	  - custom label format : name of label:color(color can be selected from valid color values)
 	- Column: (data type)string
 		- If column in not available on board then it will create new column with specified column name and then card to it.
-		
- ## Next Development steps
- 
- - Currently program is consuming API only once and getting the response with it. For next development phase, it should check for the status code and if its other that 200, 201 then it should retry consuming the same API.
-
- - Multithreading system can be incorporated in future.
- 
- - Suitbale confluence page should be in place for all the status code and its description.
- 
- - Constants should be incorporated to extract fields in json payload.
- 
- ## Time Spent
- 
- - I have spent approximately 20 hours for this task.
 
