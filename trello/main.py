@@ -1,7 +1,7 @@
 from trello import boards, message, lists, labels, util, message_processor
 
-key = "1e6831b1f78b8934adc4a3da342be951"
-token = "d787b3d2d19cb3428058f6e9556035bf2516360b605253483708a9a0732ca322"
+key = ""
+token = ""
 
 
 def get_available_lists_and_labels(board_id):
@@ -42,7 +42,7 @@ def get_inputs(board_id):
 
 
 def main():
-    board_id = "5f741bd3fc46e569b4b65c2f"
+    board_id = ""
     available_labels, available_columns = get_available_lists_and_labels(board_id)
 
     input_message = get_inputs(board_id)
